@@ -37,6 +37,8 @@
                 </div>
                 <div class="navbar-end hidden lg:flex">
                     <ul class="menu menu-horizontal px-1 font-medium">
+                        <li><a href="{{ url('/') }}" class="text-shadow">Home</a></li>
+                        <li><a href="{{ route('login') }}" class="text-shadow">Cek Akun</a></li>
                         <li><a href="{{ route('login') }}" class="text-shadow">Login</a></li>
                         <li><a href="{{ route('register') }}" class="text-shadow">Register</a></li>
                     </ul>
@@ -47,13 +49,17 @@
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                         </div>
                         <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+                            <li><a href="{{ url('/') }}" class="text-black">Home</a></li>
+                            <li><a href="{{ route('login') }}" class="text-black">Cek Akun</a></li>
                             <li><a href="{{ route('login') }}" class="text-black">Login</a></li>
                             <li><a href="{{ route('register') }}" class="text-black">Register</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
-            {{ $slot }}
+            <div class="pt-24 md:pt-2">
+                {{ $slot }}
+            </div>
         </div>
     </body>
 </html>

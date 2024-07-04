@@ -42,9 +42,6 @@
         </style>
     </head>
     <body class="font-sans antialiased" style="height: 100vh">
-        @php
-            $phone = App\Models\User::where('role', 'admin')->first()->phone;
-        @endphp
         <div class="navbar" style="position:fixed; z-index: 100; background-color:rgb(32 33 36)">
             <div class="navbar-start">
                 <a href="/" class="btn btn-ghost text-xl">
@@ -98,60 +95,51 @@
 
         <section style="background:linear-gradient(308deg, rgb(19 19 19 / 83%), rgba(110, 107, 107, 0.4)), url(http://127.0.0.1:8000/images/home.png); background-repeat: no-repeat; background-size: cover; height:740px; background-position: center;">
             <div class="text-center lg:px-36 px-12 pt-36 lg:pt-44 lg:text-5xl text-white" style="text-shadow: 2px 2px 3px rgba(43, 41, 41, 0.6); letter-spacing: 3px;">
-                <h2><b>VEST <span class="text-red-700">X</span> ANG PREMIUM</b></h2>
-                <p class="lg:text-2xl" style="">Temukan Langganan Netflixmu di sini. Kualitas terbaik dan bawa dunia hiburan ke rumah Anda dengan Netflix</p>
+                <h2><b>LIST <span class="text-red-700">TRANSAKSI</span></b></h2>
             </div>
-            <div class="text-center mt-12 lg:px-36 lg:mt-24 lg:text-2xl text-white">
-                <div class="cards border bg-natural" style="background-color: oklch(0.23 0.01 255.81); padding:2rem; text-shadow: 2px 2px 3px rgba(15, 14, 14, 0.6); letter-spacing: 3px;">
-                    <h3><span class="text-red-700">STOK</span> NETFLIX</h3>
-                    <hr>
-                    <table class="w-full mt-3">
-                        <tr>
-                            <td>Private: {{ $products->where('type', 'Private')->sum('stock') }}</td>
-                            <td>Sharing: {{ $products->where('type', 'Sharing')->sum('stock') }} </td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-        </section>
-        <section class="pb-36" style="background:linear-gradient(180deg, rgb(39 37 38 / 83%), rgba(35, 34, 34, 0.4)), url('{{ asset('images/home2.jpg') }}'); backgroun-position: center; background-repeat: no-repeat; background-size: cover;">
-            <div class="text-center px-12 lg:px-36 lg:text-2xl text-white">
-                <div class="text-center lg:px-12 pt-12 lg:pt-24 text-3xl md:text-5xl text-white" style="text-shadow: 2px 2px 3px rgba(1, 1, 1, 0.6); letter-spacing: 3px;">
-                    <h2><b>NETFLIX</b> <span class="text-red-700">PREMIUM</span></h2>
-                    <p class="lg:text-2xl text-xl mt-5" style="">4K UHD FULL GUARANTED</p>
-                </div>
-                <div class="flex flex-col md:flex-row justify-center gap-5 text-danger" style="color: red">
-                    @foreach ($products as $product)
+            <div class="px-24">
+                @foreach ($transactions as $transaction)
                     <div class="card mt-16 w-full shadow-xl" style="background-color: oklch(0.54 0.01 16.2 / 0.5); letter-spacing: 3px; position: relative">
                         <div class="card-body">
                             <h2 class="card-title text-xl md:text-3xl text-red-700 card-h">
-                                {{ strtoupper($product->type) }}
+                                {{ strtoupper($transaction->invoice) }}
                             </h2>
                             <div class="mt-2" style="background-color: oklch(0.24 0.01 0); border: 1px solid black; color: white; padding: 12px 40px; border-radius: 20px">
-                                {{ $product->description }}
+                                {{ $transaction->product->name }}
                             </div>
                             <div class="text-center">
                                 <h2 class="text-xl md:text-3xl" style="color: rgb(252, 252, 252); text-shadow: 2px 2px 3px rgba(20, 20, 20, 0.6); letter-spacing: 1px;">
-                                    <b><span class="text-xl">Rp.</span> {{ number_format($product->price) }} / <span class="text-xl">Bln</span></b>
+                                    <b class="text-{{ $transaction->status==1?'white':'red' }}-700">STATUS AKUN : {{ $transaction->status==1?'AKTIF':'NON AKTIF' }}</b>
                                 </h2>
                             </div>
-                            <a href="https://wa.me/{{ $phone }}" target="_blank" class="btn btn-outline btn-ghost text-white py-3">Buy Now</a>
                             <hr>
                             <div class="card-actions mt-2">
                                 <ul style="list-style: none;" class="text-m md:text-l">
-                                    @foreach ($product->product_behaviors as $item)
                                     <li>
                                         <div class="flex gap-2 shadow-light">
-                                            <img src="{{ asset('images/check.png') }}" style="max-width: 100%; height: 20px"> <span class="text-lg">{{ $item->name }}</span>
+                                            <img src="{{ asset('images/check.png') }}" style="max-width: 100%; height: 20px"> <span>Aktif {{ date('d/m/Y', strtotime($transaction->date_start)) }}</span>
                                         </div>
                                     </li>
-                                    @endforeach
+                                    <li>
+                                        <div class="flex gap-2 shadow-light">
+                                            <img src="{{ asset('images/check.png') }}" style="max-width: 100%; height: 20px"> <span>Non Aktif {{ date('d/m/Y', strtotime($transaction->date_end)) }}</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="flex gap-2 shadow-light">
+                                            <img src="{{ asset('images/check.png') }}" style="max-width: 100%; height: 20px"> <span>Pembayaran {{ $transaction->payment_status }}</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="flex gap-2 shadow-light">
+                                            <img src="{{ asset('images/check.png') }}" style="max-width: 100%; height: 20px"> <span>Harga Rp. {{ number_format($transaction->total) }}</span>
+                                        </div>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
                     </div>
-                    @endforeach
-                </div>
+                @endforeach
             </div>
         </section>
     </body>
