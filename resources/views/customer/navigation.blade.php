@@ -9,7 +9,7 @@
             @if (Auth::check())
                 <li>
                     <li><a href="{{ url('/') }}" class="text-shadow">Home</a></li>
-                    <li><a href="{{ route('page.checkAccount') }}" class="text-shadow">Cek Akun</a></li>
+                    {{-- <li><a href="{{ route('page.checkAccount') }}" class="text-shadow">Cek Akun</a></li> --}}
                     <li><a href="{{ route('page.transaction') }}" class="text-shadow">Transaksi</a></li>
                     <form action="{{ route('logout') }}" method="post">
                         @csrf
@@ -18,7 +18,7 @@
                 </li>
             @else
                 <li><a href="{{ url('/') }}" class="text-shadow">Home</a></li>
-                <li><a href="{{ route('page.checkAccount') }}" class="text-shadow">Cek Akun</a></li>
+                {{-- <li><a href="{{ route('page.checkAccount') }}" class="text-shadow">Cek Akun</a></li> --}}
                 <li><a href="{{ route('login') }}" class="text-shadow">Login</a></li>
                 <li><a href="{{ route('register') }}" class="text-shadow">Register</a></li>
             @endif
@@ -32,7 +32,7 @@
             <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
                 @if (Auth::check())
                     <li><a href="{{ url('/') }}" class="text-black">Home</a></li>
-                    <li><a href="{{ route('page.checkAccount') }}" class="text-black">Cek Akun</a></li>
+                    {{-- <li><a href="{{ route('page.checkAccount') }}" class="text-black">Cek Akun</a></li> --}}
                     <li><a href="{{ route('page.transaction') }}" class="text-black">Transaksi</a></li>
                     <li>
                         <form action="{{ route('logout') }}" method="post">
@@ -42,7 +42,7 @@
                     </li>
                 @else
                     <li><a href="{{ url('/') }}" class="text-black">Home</a></li>
-                    <li><a href="{{ route('page.checkAccount') }}" class="text-black">Cek Akun</a></li>
+                    {{-- <li><a href="{{ route('page.checkAccount') }}" class="text-black">Cek Akun</a></li> --}}
                     <li><a href="{{ route('login') }}" class="text-black">Login</a></li>
                     <li><a href="{{ route('register') }}" class="text-black">Register</a></li>
                 @endif

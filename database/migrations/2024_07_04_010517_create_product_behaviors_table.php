@@ -15,7 +15,7 @@ class CreateProductBehaviorsTable extends Migration
     {
         Schema::create('product_behaviors', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('product_id')->constrained();
+            $table->foreignId('product_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('name');
             $table->string('description')->nullable();
             $table->timestamps();

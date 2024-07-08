@@ -38,7 +38,7 @@
                 <div class="navbar-end hidden lg:flex">
                     <ul class="menu menu-horizontal px-1 font-medium">
                         <li><a href="{{ url('/') }}" class="text-shadow">Home</a></li>
-                        <li><a href="{{ route('login') }}" class="text-shadow">Cek Akun</a></li>
+                        {{-- <li><a href="{{ route('login') }}" class="text-shadow">Cek Akun</a></li> --}}
                         <li><a href="{{ route('login') }}" class="text-shadow">Login</a></li>
                         <li><a href="{{ route('register') }}" class="text-shadow">Register</a></li>
                     </ul>
@@ -50,7 +50,7 @@
                         </div>
                         <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
                             <li><a href="{{ url('/') }}" class="text-black">Home</a></li>
-                            <li><a href="{{ route('login') }}" class="text-black">Cek Akun</a></li>
+                            {{-- <li><a href="{{ route('login') }}" class="text-black">Cek Akun</a></li> --}}
                             <li><a href="{{ route('login') }}" class="text-black">Login</a></li>
                             <li><a href="{{ route('register') }}" class="text-black">Register</a></li>
                         </ul>
