@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\NetflixAccountController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProductBehaviorController;
 use App\Http\Controllers\ProductController;
@@ -38,6 +39,7 @@ Route::group(['middleware' => ['auth','admin']], function () {
     Route::resource('product', ProductController::class);
     Route::resource('product-behavior', ProductBehaviorController::class);
     Route::resource('transaction', TransactionController::class);
+    Route::resource('netflix-account', NetflixAccountController::class);
     Route::get('setting', function(){
         $customer = Auth::user();
         return view('admin.setting', compact('customer'));
@@ -47,5 +49,6 @@ Route::group(['middleware' => ['auth','admin']], function () {
 Route::group(['middleware' => ['auth']], function () {
     Route::get('transaksi',[PageController::class,'transaction'])->name('page.transaction');
 });
+Route::get('check-account',[PageController::class,'checkAccount'])->name('page.checkAccount');
 
 require __DIR__.'/auth.php';

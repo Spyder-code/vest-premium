@@ -11,6 +11,7 @@ class Transaction extends Model
     protected $fillable = [
         'user_id',
         'product_id',
+        'netflix_account_id',
         'invoice',
         'date',
         'qty',
@@ -29,5 +30,10 @@ class Transaction extends Model
     public function customer()
     {
         return $this->belongsTo(User::class,'user_id');
+    }
+
+    public function netflixAccount()
+    {
+        return $this->belongsTo(NetflixAccount::class);
     }
 }

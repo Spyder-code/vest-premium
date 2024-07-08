@@ -55,6 +55,17 @@
                             </label>
                             <label class="form-control mb-2 w-full">
                                 <div class="label">
+                                    <span class="label-text">Akun Netflix</span>
+                                </div>
+                                <select class="select select-bordered w-full" name="netflix_account_id">
+                                    <option disabled selected>Pilih akun netflix?</option>
+                                    @foreach ($netflix_accounts as $netflix_account)
+                                        <option value="{{ $netflix_account->id }}">{{ $netflix_account->username }} - {{ $netflix_account->email }} </option>
+                                    @endforeach
+                                </select>
+                            </label>
+                            <label class="form-control mb-2 w-full">
+                                <div class="label">
                                     <span class="label-text">Tanggal Aktif</span>
                                 </div>
                                 <input type="date" name="start_date" class="input input-bordered w-full" />
@@ -114,6 +125,7 @@
                                     <td>{{ $transaction->payment_status }}</td>
                                     <td>
                                         <div class="flex gap-2">
+                                            <a href="{{ route('transaction.show', $transaction) }}" class="btn btn-outline btn-warning btn-sm">Detail</a>
                                             <a href="{{ route('transaction.edit', $transaction) }}" class="btn btn-outline btn-info btn-sm">Edit</a>
                                             <form action="{{ route('transaction.destroy', $transaction) }}" class="inline" onsubmit="return confirm('Are you sure?')" method="post">
                                                 @csrf

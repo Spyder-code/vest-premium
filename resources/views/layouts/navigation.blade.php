@@ -21,6 +21,9 @@
                     <x-nav-link :href="route('product.index')" :active="request()->routeIs('product.*')">
                         {{ __('Produk') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('netflix-account.index')" :active="request()->routeIs('netflix-account.*')">
+                        {{ __('Akun Netflix') }}
+                    </x-nav-link>
                     <x-nav-link :href="route('transaction.index')" :active="request()->routeIs('transaction.*')">
                         {{ __('Transaksi') }}
                     </x-nav-link>

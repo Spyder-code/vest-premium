@@ -41,15 +41,19 @@
             }
         </style>
     </head>
-    <body class="font-sans antialiased" style="height: 100vh">
+    <body class="font-sans antialiased pb-5" style="height: 100vh">
         @include('customer.navigation')
 
-        <section style="background:linear-gradient(308deg, rgb(19 19 19 / 83%), rgba(110, 107, 107, 0.4)), url(http://127.0.0.1:8000/images/home.png); background-repeat: no-repeat; background-size: cover; min-height:740px; background-position: center;">
-            <div class="text-center lg:px-36 px-12 pt-36 lg:pt-44 lg:text-5xl text-white" style="text-shadow: 2px 2px 3px rgba(43, 41, 41, 0.6); letter-spacing: 3px;">
-                <h2><b>LIST <span class="text-red-700">TRANSAKSI</span></b></h2>
-            </div>
-            <div class="px-24">
-                @foreach ($transactions as $transaction)
+        <section style="background:linear-gradient(308deg, rgb(19 19 19 / 83%), rgba(110, 107, 107, 0.4)), url(http://127.0.0.1:8000/images/home.png); background-repeat: no-repeat; background-size: cover; min-height:740px; background-position: center; padding-bottom:34px">
+            <form action="{{ route('page.checkAccount') }}" method="GET" class="text-center lg:px-36 px-12 pt-36 lg:pt-44 text-2xl lg:text-5xl text-white" style="text-shadow: 2px 2px 3px rgba(43, 41, 41, 0.6); letter-spacing: 3px;">
+                <h2><b>CHECK <span class="text-red-700">ACCOUNT</span></b></h2>
+                <div class="flex gap-2 w-full max-w-xs mt-16">
+                    <input type="text" placeholder="Masukkan Email" name="email" id="email" autofocus class="text-center" style="background: rgba(255, 255, 255, 0.496); border: 1px solid white; width:75%" value="{{ request('email') }}">
+                    <button type="submit" class="btn btn-success" style="width: 25%">Check</button>
+                </div>
+            </form>
+            <div class="px-2 md:px-24">
+                @forelse ($transactions as $transaction)
                     <div class="card mt-16 w-full shadow-xl" style="background-color: oklch(0.54 0.01 16.2 / 0.5); letter-spacing: 3px; position: relative">
                         <div class="card-body">
                             <h2 class="card-title text-xl md:text-3xl text-red-700 card-h">
@@ -109,7 +113,9 @@
                             </div>
                         </div>
                     </div>
-                @endforeach
+                @empty
+                    <p class="text-center text-white mt-16 text-3xl"><b>Tidak Ditemukan!</b></p>
+                @endforelse
             </div>
         </section>
     </body>

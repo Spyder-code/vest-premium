@@ -36,6 +36,17 @@
                     </label>
                     <label class="form-control mb-2 w-full">
                         <div class="label">
+                            <span class="label-text">Akun Netflix</span>
+                        </div>
+                        <select class="select select-bordered w-full" name="netflix_account_id">
+                            <option disabled selected>Pilih akun netflix?</option>
+                            @foreach ($netflix_accounts as $netflix_account)
+                                <option {{ $transaction->netflix_account_id==$netflix_account->id?'selected':'' }} value="{{ $netflix_account->id }}">{{ $netflix_account->username }} - {{ $netflix_account->email }} </option>
+                            @endforeach
+                        </select>
+                    </label>
+                    <label class="form-control mb-2 w-full">
+                        <div class="label">
                             <span class="label-text">Tanggal Aktif</span>
                         </div>
                         <input type="date" name="start_date" value="{{ $transaction->date_start }}" class="input input-bordered w-full" />

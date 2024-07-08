@@ -17,6 +17,7 @@ class CreateTransactionsTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->foreignId('product_id')->constrained();
+            $table->foreignId('netflix_account_id')->constrained();
             $table->string('invoice');
             $table->timestamp('date')->useCurrent();
             $table->integer('qty')->default(1);

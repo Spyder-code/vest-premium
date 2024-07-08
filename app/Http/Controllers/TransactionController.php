@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\NetflixAccount;
 use App\Models\Product;
 use App\Models\Transaction;
 use App\Models\User;
@@ -19,7 +20,8 @@ class TransactionController extends Controller
         $transactions = Transaction::all();
         $users = User::all()->where('role', 'customer');
         $products = Product::all();
-        return view('admin.transaction.index', compact('transactions', 'users', 'products'));
+        $netflix_accounts = NetflixAccount::all();
+        return view('admin.transaction.index', compact('transactions', 'users', 'products', 'netflix_accounts'));
     }
 
     /**
@@ -46,6 +48,7 @@ class TransactionController extends Controller
             'start_date' => 'required',
             'end_date' => 'required',
             'payment_status' => 'required',
+            'netflix_account_id' => 'required',
         ]);
 
         $no = Transaction::max('id') + 1;
@@ -53,6 +56,7 @@ class TransactionController extends Controller
         Transaction::create([
             'user_id' => $request->user_id,
             'product_id' => $request->product_id,
+            'netflix_account_id' => $request->netflix_account_id,
             'invoice' => 'INV-' . sprintf('%02d', $request->user_id) . '-' .sprintf('%03d', $no),
             'qty' => 1,
             'total' => $product->price,
@@ -73,7 +77,7 @@ class TransactionController extends Controller
      */
     public function show(Transaction $transaction)
     {
-        //
+        return view('admin.transaction.show', compact('transaction'));
     }
 
     /**
@@ -86,7 +90,8 @@ class TransactionController extends Controller
     {
         $products = Product::all();
         $users = User::all()->where('role', 'customer');
-        return view('admin.transaction.edit', compact('transaction', 'products', 'users'));
+        $netflix_accounts = NetflixAccount::all();
+        return view('admin.transaction.edit', compact('transaction', 'products', 'users', 'netflix_accounts'));
     }
 
     /**
@@ -104,12 +109,14 @@ class TransactionController extends Controller
             'start_date' => 'required',
             'end_date' => 'required',
             'payment_status' => 'required',
+            'netflix_account_id' => 'required',
         ]);
 
         $product = Product::find($request->product_id);
         $transaction->update([
             'user_id' => $request->user_id,
             'product_id' => $request->product_id,
+            'netflix_account_id' => $request->netflix_account_id,
             'invoice' => 'INV-' . sprintf('%02d', $request->user_id) . '-' .sprintf('%03d', $transaction->id),
             'qty' => 1,
             'total' => $product->price,
